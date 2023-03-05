@@ -1,16 +1,16 @@
-## naver-sens-java
-* * *
+# naver-sens-java
+
 Naver Cloud Platform SENS(Simple & Easy Notification Service) for Java
 
+## How to
 
-### How to
-* * *
 To get a Git project into your build:
 
-Step 1. Add the JitPack repository to your build file
+*Step 1*. Add the JitPack repository to your build file
 
 gradle maven sbt leiningen Add it in your root build.gradle at the end of repositories:
-```
+
+```groovy
 allprojects {
 	repositories {
 		...
@@ -18,8 +18,10 @@ allprojects {
 	}
 }
 ```
-Step 2. Add the dependency
-```
+
+*Step 2*. Add the dependency
+
+```groovy
 dependencies {
     implementation 'com.github.Handwoong:naver-sens-java:Tag'
 }
