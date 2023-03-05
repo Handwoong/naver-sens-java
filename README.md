@@ -23,6 +23,6 @@ allprojects {
 
 ```groovy
 dependencies {
-    implementation 'com.github.Handwoong:naver-sens-java:Tag'
+    implementation 'com.github.Handwoong:naver-sens-java:0.1.0'
 }
 ```
