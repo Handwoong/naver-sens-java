@@ -1,9 +1,22 @@
 plugins {
     id 'java'
+    id 'maven-publish'
 }
 
 group 'sens'
 version '0.1.0-alpha'
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+
+            version = version
+            artifactId = project.name
+            groupId = rootProject.group
+        }
+    }
+}
 
 repositories {
     mavenCentral()
