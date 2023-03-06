@@ -1,4 +1,4 @@
-package sens.request.kakao;
+package sens.request.kakao.messages;
 
 public class FailOverConfig {
 	private final String type;

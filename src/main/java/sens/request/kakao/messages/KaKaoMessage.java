@@ -2,8 +2,6 @@ package sens.request.kakao.messages;
 
 import java.util.List;
 
-import sens.request.kakao.FailOverConfig;
-
 public class KaKaoMessage {
 	private final boolean isAd;
 	private final KakaoImage image;
