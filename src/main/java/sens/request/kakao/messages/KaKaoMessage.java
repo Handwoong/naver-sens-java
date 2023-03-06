@@ -2,6 +2,8 @@ package sens.request.kakao.messages;
 
 import java.util.List;
 
+import sens.request.kakao.FailOverConfig;
+
 public class KaKaoMessage {
 	private final boolean isAd;
 	private final KakaoImage image;
@@ -12,6 +14,7 @@ public class KaKaoMessage {
 	private final String headerContent;
 	private final KakaoItemTitleAndDescription itemHighlight;
 	private final KakaoItem item;
+	private final FailOverConfig failoverConfig;
 	private final List<KakaoButton> buttons;
 	private final boolean useSmsFailover;
 
@@ -25,6 +28,7 @@ public class KaKaoMessage {
 		private String headerContent;
 		private KakaoItemTitleAndDescription itemHighlight;
 		private KakaoItem item;
+		private FailOverConfig failoverConfig;
 		private List<KakaoButton> buttons;
 		private boolean useSmsFailover;
 
@@ -68,6 +72,11 @@ public class KaKaoMessage {
 			return this;
 		}
 
+		public Builder failoverConfig(FailOverConfig failoverConfig) {
+			this.failoverConfig = failoverConfig;
+			return this;
+		}
+
 		public Builder buttons(List<KakaoButton> kakaoButtons) {
 			this.buttons = kakaoButtons;
 			return this;
@@ -93,6 +102,7 @@ public class KaKaoMessage {
 		this.headerContent = builder.headerContent;
 		this.itemHighlight = builder.itemHighlight;
 		this.item = builder.item;
+		this.failoverConfig = builder.failoverConfig;
 		this.buttons = builder.buttons;
 		this.useSmsFailover = builder.useSmsFailover;
 	}
@@ -131,6 +141,10 @@ public class KaKaoMessage {
 
 	public KakaoItem getItem() {
 		return item;
+	}
+
+	public FailOverConfig getFailoverConfig() {
+		return failoverConfig;
 	}
 
 	public List<KakaoButton> getButtons() {
