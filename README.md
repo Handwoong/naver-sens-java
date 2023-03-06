@@ -12,10 +12,10 @@ gradle maven sbt leiningen Add it in your root build.gradle at the end of reposi
 
 ```groovy
 allprojects {
-	repositories {
-		...
-		maven { url 'https://jitpack.io' }
-	}
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
+    }
 }
 ```
 
@@ -26,3 +26,7 @@ dependencies {
     implementation 'com.github.Handwoong:naver-sens-java:0.1.0'
 }
 ```
+
+## Example
+
+* [카카오 알림톡 예제](https://github.com/Handwoong/naver-sens-java/blob/master/example/KakaoAlimTalkExample.md)
