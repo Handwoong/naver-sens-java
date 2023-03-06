@@ -1,5 +1,7 @@
 package sens;
 
+import java.nio.charset.StandardCharsets;
+
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
@@ -30,21 +32,19 @@ public class MessageHeader {
 		String space = " ";
 		String newLine = "\n";
 		String method = "POST";
-		String message = new StringBuilder()
-			.append(method)
-			.append(space)
-			.append(url)
-			.append(newLine)
-			.append(timestamp)
-			.append(newLine)
-			.append(accessKey)
-			.toString();
+		String message = method
+			+ space
+			+ url
+			+ newLine
+			+ timestamp
+			+ newLine
+			+ accessKey;
 
-		SecretKeySpec signingKey = new SecretKeySpec(secretKey.getBytes("UTF-8"), "HmacSHA256");
+		SecretKeySpec signingKey = new SecretKeySpec(secretKey.getBytes(StandardCharsets.UTF_8), "HmacSHA256");
 		Mac mac = Mac.getInstance("HmacSHA256");
 		mac.init(signingKey);
 
-		byte[] rawHmac = mac.doFinal(message.getBytes("UTF-8"));
+		byte[] rawHmac = mac.doFinal(message.getBytes(StandardCharsets.UTF_8));
 		return Base64.encodeBase64String(rawHmac);
 	}
 }
