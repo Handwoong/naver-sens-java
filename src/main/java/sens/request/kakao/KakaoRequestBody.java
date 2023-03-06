@@ -9,6 +9,7 @@ public class KakaoRequestBody implements MessageBody {
 	private final String plusFriendId;
 	private final List<KaKaoMessage> messages;
 	private final String templateCode;
+	private final FailOverConfig failoverConfig;
 	private final String reserveTime;
 	private final String reserveTimeZone;
 	private final String scheduleCode;
@@ -17,6 +18,7 @@ public class KakaoRequestBody implements MessageBody {
 		private final String plusFriendId;
 		private final List<KaKaoMessage> messages;
 		private String templateCode;
+		private FailOverConfig failoverConfig;
 		private String reserveTime;
 		private String reserveTimeZone;
 		private String scheduleCode;
@@ -28,6 +30,11 @@ public class KakaoRequestBody implements MessageBody {
 
 		public Builder templateCode(String templateCode) {
 			this.templateCode = templateCode;
+			return this;
+		}
+
+		public Builder failoverConfig(FailOverConfig failoverConfig) {
+			this.failoverConfig = failoverConfig;
 			return this;
 		}
 
@@ -55,6 +62,7 @@ public class KakaoRequestBody implements MessageBody {
 		this.plusFriendId = builder.plusFriendId;
 		this.messages = builder.messages;
 		this.templateCode = builder.templateCode;
+		this.failoverConfig = builder.failoverConfig;
 		this.reserveTime = builder.reserveTime;
 		this.reserveTimeZone = builder.reserveTimeZone;
 		this.scheduleCode = builder.scheduleCode;
@@ -70,6 +78,10 @@ public class KakaoRequestBody implements MessageBody {
 
 	public String getTemplateCode() {
 		return templateCode;
+	}
+
+	public FailOverConfig getFailoverConfig() {
+		return failoverConfig;
 	}
 
 	public String getReserveTime() {
