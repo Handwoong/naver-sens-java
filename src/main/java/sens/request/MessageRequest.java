@@ -22,7 +22,7 @@ public class MessageRequest {
     public Request createSendMessageRequest(KakaoTemplate messageTemplate,
             String url) {
         try {
-            return header.createHeader(url)
+            return header.createHeader("POST", url)
                     .url("https://sens.apigw.ntruss.com" + url)
                     .post(RequestBody.create(mapper.writeValueAsString(messageTemplate),
                             MediaType.parse("application/json")))
@@ -33,16 +33,16 @@ public class MessageRequest {
     }
 
     public Request createCheckMessageSendRequest(String requestId, String url) {
-        return header.createHeader(url)
-                .url("https://sens.apigw.ntruss.com" + url + "?requestId="
-                        + requestId)
+        String newUrl = url + "?requestId=" + requestId;
+        return header.createHeader("GET", newUrl)
+                .url("https://sens.apigw.ntruss.com" + newUrl)
                 .build();
     }
 
     public Request createCheckMessageSendResultRequest(String messageId, String url) {
-        return header.createHeader(url)
-                .url("https://sens.apigw.ntruss.com" + url + "/"
-                        + messageId)
+        String newUrl = url + "/" + messageId;
+        return header.createHeader("GET", newUrl)
+                .url("https://sens.apigw.ntruss.com" + newUrl)
                 .build();
     }
 }

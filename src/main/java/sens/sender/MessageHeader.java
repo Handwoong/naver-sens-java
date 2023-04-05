@@ -18,20 +18,20 @@ public class MessageHeader {
         this.secretKey = secretKey;
     }
 
-    public Request.Builder createHeader(String url) {
+    public Request.Builder createHeader(String method, String url) {
         String timestamp = Long.toString(System.currentTimeMillis());
         Request.Builder request = new Request.Builder();
         request.addHeader("Content-type", "application/json");
         request.addHeader("x-ncp-apigw-timestamp", timestamp);
         request.addHeader("x-ncp-iam-access-key", accessKey);
-        request.addHeader("x-ncp-apigw-signature-v2", makeSignature(timestamp, url));
+        request.addHeader("x-ncp-apigw-signature-v2",
+                makeSignature(timestamp, method, url));
         return request;
     }
 
-    public String makeSignature(String timestamp, String url) {
+    public String makeSignature(String timestamp, String method, String url) {
         String space = " ";
         String newLine = "\n";
-        String method = "POST";
         String message = method
                 + space
                 + url
