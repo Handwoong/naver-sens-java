@@ -23,11 +23,10 @@ allprojects {
 
 ```groovy
 dependencies {
-    implementation 'com.github.Handwoong:naver-sens-java:0.1.0'
+    implementation 'com.github.Handwoong:naver-sens-java:0.2.1'
 }
 ```
 
 ## Example
 
 * [카카오 알림톡 예제](https://github.com/Handwoong/naver-sens-java/blob/master/example/KakaoAlimTalkExample.md)
-* [카카오 친구톡 예제](https://github.com/Handwoong/naver-sens-java/blob/master/example/KakaoFriendTalkExample.md)
