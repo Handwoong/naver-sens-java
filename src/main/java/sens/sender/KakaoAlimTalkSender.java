@@ -7,6 +7,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 import sens.exception.FailSendRequestException;
 import sens.request.MessageRequest;
+import sens.response.CheckSendKakaoResponse;
 import sens.response.MessageResponse;
 import sens.response.SendKakaoResponse;
 import sens.template.MessageTemplate;
@@ -40,7 +41,21 @@ public class KakaoAlimTalkSender implements MessageSender {
     }
 
     @Override
-    public MessageResponse checkMessageSend() {
+    public MessageResponse checkMessageSend(String requestId) {
+        Request request = messageRequest.createCheckMessageSendRequest(
+                requestId, url);
+        try {
+            Response response = client.newCall(request).execute();
+            assert response.body() != null;
+            return mapper.readValue(response.body().string(),
+                    CheckSendKakaoResponse.class);
+        } catch (Exception e) {
+            throw new FailSendRequestException("메시지 전송 요청에 실패했습니다.");
+        }
+    }
+
+    @Override
+    public MessageResponse checkMessageSendResult(String messageId) {
         return null;
     }
 }

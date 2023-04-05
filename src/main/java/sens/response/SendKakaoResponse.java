@@ -90,4 +90,15 @@ public class SendKakaoResponse implements MessageResponse {
             return useSmsFailover;
         }
     }
+
+    @Override
+    public String toString() {
+        return "SendKakaoResponse{" +
+                "requestId='" + requestId + '\'' +
+                ", requestTime='" + requestTime + '\'' +
+                ", statusCode=" + statusCode +
+                ", statusName='" + statusName + '\'' +
+                ", messages=" + messages +
+                '}';
+    }
 }
