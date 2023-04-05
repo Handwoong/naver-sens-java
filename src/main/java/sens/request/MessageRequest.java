@@ -31,4 +31,18 @@ public class MessageRequest {
             throw new FailCreateRequestException("템플릿을 JSON 객체로 변환하는데 실패했습니다.");
         }
     }
+
+    public Request createCheckMessageSendRequest(String requestId, String url) {
+        return header.createHeader(url)
+                .url("https://sens.apigw.ntruss.com" + url + "?requestId="
+                        + requestId)
+                .build();
+    }
+
+    public Request createCheckMessageSendResultRequest(String messageId, String url) {
+        return header.createHeader(url)
+                .url("https://sens.apigw.ntruss.com" + url + "/"
+                        + messageId)
+                .build();
+    }
 }
