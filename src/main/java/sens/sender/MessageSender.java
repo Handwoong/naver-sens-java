@@ -7,5 +7,7 @@ public interface MessageSender {
 
     MessageResponse send(MessageTemplate messageTemplate);
 
-    MessageResponse checkMessageSend();
+    MessageResponse checkMessageSend(String requestId);
+
+    MessageResponse checkMessageSendResult(String messageId);
 }
