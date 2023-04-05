@@ -2,11 +2,11 @@ package sens.response;
 
 import java.util.List;
 
-public class CheckSendKakaoResponse implements MessageResponse {
+public class CheckSendKakaoResponse {
 
     private String requestId;
 
-    private int statusCode;
+    private String statusCode;
 
     private String statusName;
 
@@ -19,7 +19,7 @@ public class CheckSendKakaoResponse implements MessageResponse {
         return requestId;
     }
 
-    public int getStatusCode() {
+    public String getStatusCode() {
         return statusCode;
     }
 

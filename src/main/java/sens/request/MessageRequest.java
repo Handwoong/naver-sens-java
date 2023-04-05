@@ -6,7 +6,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import sens.exception.FailCreateRequestException;
 import sens.sender.MessageHeader;
-import sens.template.MessageTemplate;
+import sens.template.kakao.KakaoTemplate;
 
 public class MessageRequest {
 
@@ -19,7 +19,7 @@ public class MessageRequest {
         this.mapper = mapper;
     }
 
-    public Request createSendMessageRequest(MessageTemplate messageTemplate,
+    public Request createSendMessageRequest(KakaoTemplate messageTemplate,
             String url) {
         try {
             return header.createHeader(url)

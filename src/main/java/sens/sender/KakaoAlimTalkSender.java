@@ -8,11 +8,11 @@ import okhttp3.Response;
 import sens.exception.FailSendRequestException;
 import sens.request.MessageRequest;
 import sens.response.CheckSendKakaoResponse;
-import sens.response.MessageResponse;
+import sens.response.CheckSendKakaoResultResponse;
 import sens.response.SendKakaoResponse;
-import sens.template.MessageTemplate;
+import sens.template.kakao.KakaoTemplate;
 
-public class KakaoAlimTalkSender implements MessageSender {
+public class KakaoAlimTalkSender {
 
     private final String url;
 
@@ -28,8 +28,7 @@ public class KakaoAlimTalkSender implements MessageSender {
         this.messageRequest = new MessageRequest(accessKey, secretKey, mapper);
     }
 
-    @Override
-    public SendKakaoResponse send(MessageTemplate messageTemplate) {
+    public SendKakaoResponse send(KakaoTemplate messageTemplate) {
         Request request = messageRequest.createSendMessageRequest(messageTemplate, url);
         try {
             Response response = client.newCall(request).execute();
@@ -40,8 +39,7 @@ public class KakaoAlimTalkSender implements MessageSender {
         }
     }
 
-    @Override
-    public MessageResponse checkMessageSend(String requestId) {
+    public CheckSendKakaoResponse checkMessageSend(String requestId) {
         Request request = messageRequest.createCheckMessageSendRequest(
                 requestId, url);
         try {
@@ -54,8 +52,16 @@ public class KakaoAlimTalkSender implements MessageSender {
         }
     }
 
-    @Override
-    public MessageResponse checkMessageSendResult(String messageId) {
-        return null;
+    public CheckSendKakaoResultResponse checkMessageSendResult(String messageId) {
+        Request request = messageRequest.createCheckMessageSendResultRequest(
+                messageId, url);
+        try {
+            Response response = client.newCall(request).execute();
+            assert response.body() != null;
+            return mapper.readValue(response.body().string(),
+                    CheckSendKakaoResultResponse.class);
+        } catch (Exception e) {
+            throw new FailSendRequestException("메시지 전송 요청에 실패했습니다.");
+        }
     }
 }

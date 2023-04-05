@@ -2,7 +2,7 @@ package sens.response;
 
 import java.util.List;
 
-public class SendKakaoResponse implements MessageResponse {
+public class SendKakaoResponse {
 
     private String requestId;
 
@@ -88,6 +88,20 @@ public class SendKakaoResponse implements MessageResponse {
 
         public boolean isUseSmsFailover() {
             return useSmsFailover;
+        }
+
+        @Override
+        public String toString() {
+            return "KakaoResponseMessage{" +
+                    "messageId='" + messageId + '\'' +
+                    ", countryCode='" + countryCode + '\'' +
+                    ", to='" + to + '\'' +
+                    ", content='" + content + '\'' +
+                    ", requestStatusCode='" + requestStatusCode + '\'' +
+                    ", requestStatusName='" + requestStatusName + '\'' +
+                    ", requestStatusDesc='" + requestStatusDesc + '\'' +
+                    ", useSmsFailover=" + useSmsFailover +
+                    '}';
         }
     }
 
