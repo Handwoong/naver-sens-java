@@ -19,7 +19,7 @@ public class MessageRequest {
         this.mapper = mapper;
     }
 
-    public Request createSendMessageRequest(KakaoTemplate messageTemplate,
+    public Request createSendRequest(KakaoTemplate messageTemplate,
             String url) {
         try {
             return header.createHeader("POST", url)
@@ -32,14 +32,14 @@ public class MessageRequest {
         }
     }
 
-    public Request createCheckMessageSendRequest(String requestId, String url) {
+    public Request createSendInfoRequest(String requestId, String url) {
         String newUrl = url + "?requestId=" + requestId;
         return header.createHeader("GET", newUrl)
                 .url("https://sens.apigw.ntruss.com" + newUrl)
                 .build();
     }
 
-    public Request createCheckMessageSendResultRequest(String messageId, String url) {
+    public Request createSendResultInfoRequest(String messageId, String url) {
         String newUrl = url + "/" + messageId;
         return header.createHeader("GET", newUrl)
                 .url("https://sens.apigw.ntruss.com" + newUrl)

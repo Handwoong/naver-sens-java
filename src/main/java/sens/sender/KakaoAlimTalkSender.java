@@ -2,14 +2,15 @@ package sens.sender;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.IOException;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import sens.exception.FailSendRequestException;
 import sens.request.MessageRequest;
-import sens.response.CheckSendKakaoResponse;
-import sens.response.CheckSendKakaoResultResponse;
-import sens.response.SendKakaoResponse;
+import sens.response.kakao.KakaoSend;
+import sens.response.kakao.KakaoSendInfo;
+import sens.response.kakao.KakaoSendResult;
 import sens.template.kakao.KakaoTemplate;
 
 public class KakaoAlimTalkSender {
@@ -28,40 +29,30 @@ public class KakaoAlimTalkSender {
         this.messageRequest = new MessageRequest(accessKey, secretKey, mapper);
     }
 
-    public SendKakaoResponse send(KakaoTemplate messageTemplate) {
-        Request request = messageRequest.createSendMessageRequest(messageTemplate, url);
-        try {
-            Response response = client.newCall(request).execute();
-            assert response.body() != null;
-            return mapper.readValue(response.body().string(), SendKakaoResponse.class);
-        } catch (Exception e) {
-            throw new FailSendRequestException("메시지 전송 요청에 실패했습니다.");
-        }
+    public KakaoSend send(KakaoTemplate messageTemplate) {
+        Request request = messageRequest.createSendRequest(messageTemplate, url);
+        return sendRequest(request, KakaoSend.class);
     }
 
-    public CheckSendKakaoResponse checkMessageSend(String requestId) {
-        Request request = messageRequest.createCheckMessageSendRequest(
+    public KakaoSendInfo sendInfo(String requestId) {
+        Request request = messageRequest.createSendInfoRequest(
                 requestId, url);
-        try {
-            Response response = client.newCall(request).execute();
-            assert response.body() != null;
-            return mapper.readValue(response.body().string(),
-                    CheckSendKakaoResponse.class);
-        } catch (Exception e) {
-            throw new FailSendRequestException("메시지 전송 요청에 실패했습니다.");
-        }
+        return sendRequest(request, KakaoSendInfo.class);
     }
 
-    public CheckSendKakaoResultResponse checkMessageSendResult(String messageId) {
-        Request request = messageRequest.createCheckMessageSendResultRequest(
+    public KakaoSendResult sendResultInfo(String messageId) {
+        Request request = messageRequest.createSendResultInfoRequest(
                 messageId, url);
+        return sendRequest(request, KakaoSendResult.class);
+    }
+
+    private <T> T sendRequest(Request request, Class<T> clazz) {
         try {
             Response response = client.newCall(request).execute();
             assert response.body() != null;
-            return mapper.readValue(response.body().string(),
-                    CheckSendKakaoResultResponse.class);
-        } catch (Exception e) {
-            throw new FailSendRequestException("메시지 전송 요청에 실패했습니다.");
+            return mapper.readValue(response.body().string(), clazz);
+        } catch (IOException e) {
+            throw new FailSendRequestException("HTTP 요청 또는 JSON 객체 매핑에 실패했습니다.");
         }
     }
 }

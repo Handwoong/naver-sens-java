@@ -1,8 +1,8 @@
-package sens.response;
+package sens.response.kakao;
 
 import java.util.List;
 
-public class CheckSendKakaoResponse {
+public class KakaoSendInfo {
 
     private String requestId;
 
@@ -12,7 +12,7 @@ public class CheckSendKakaoResponse {
 
     private List<KakaoResponseMessage> messages;
 
-    public CheckSendKakaoResponse() {
+    public KakaoSendInfo() {
     }
 
     public String getRequestId() {
@@ -63,7 +63,7 @@ public class CheckSendKakaoResponse {
 
         private boolean useSmsFailover;
 
-        private FailOverResponse failover;
+        private FailOver failover;
 
         public KakaoResponseMessage() {
         }
@@ -128,7 +128,7 @@ public class CheckSendKakaoResponse {
             return useSmsFailover;
         }
 
-        public FailOverResponse getFailover() {
+        public FailOver getFailover() {
             return failover;
         }
 

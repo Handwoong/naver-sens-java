@@ -1,6 +1,6 @@
-package sens.response;
+package sens.response.kakao;
 
-public class FailOverResponse {
+public class FailOver {
 
     private String smsServiceId;
 
@@ -12,7 +12,7 @@ public class FailOverResponse {
 
     private String requestStatusDesc;
 
-    public FailOverResponse() {
+    public FailOver() {
     }
 
     public String getSmsServiceId() {

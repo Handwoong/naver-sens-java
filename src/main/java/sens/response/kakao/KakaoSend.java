@@ -1,8 +1,8 @@
-package sens.response;
+package sens.response.kakao;
 
 import java.util.List;
 
-public class SendKakaoResponse {
+public class KakaoSend {
 
     private String requestId;
 
@@ -14,7 +14,7 @@ public class SendKakaoResponse {
 
     private List<KakaoResponseMessage> messages;
 
-    public SendKakaoResponse() {
+    public KakaoSend() {
     }
 
     public String getRequestId() {

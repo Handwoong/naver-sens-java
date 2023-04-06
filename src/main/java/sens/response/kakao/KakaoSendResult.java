@@ -1,6 +1,6 @@
-package sens.response;
+package sens.response.kakao;
 
-public class CheckSendKakaoResultResponse {
+public class KakaoSendResult {
 
     private String messageId;
 
@@ -34,9 +34,9 @@ public class CheckSendKakaoResultResponse {
 
     private boolean useSmsFailover;
 
-    private KakaoResponseFailOver failOver;
+    private KakaoResponseFailOver failover;
 
-    public CheckSendKakaoResultResponse() {
+    public KakaoSendResult() {
     }
 
     public String getMessageId() {
@@ -104,7 +104,7 @@ public class CheckSendKakaoResultResponse {
     }
 
     public KakaoResponseFailOver getFailOver() {
-        return failOver;
+        return failover;
     }
 
     public static class KakaoResponseFailOver {
@@ -208,7 +208,7 @@ public class CheckSendKakaoResultResponse {
                 ", messageStatusName='" + messageStatusName + '\'' +
                 ", messageStatusDesc='" + messageStatusDesc + '\'' +
                 ", useSmsFailover=" + useSmsFailover +
-                ", failOver=" + failOver +
+                ", failover=" + failover +
                 '}';
     }
 }
