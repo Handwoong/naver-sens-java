@@ -23,7 +23,7 @@ allprojects {
 
 ```groovy
 dependencies {
-    implementation 'com.github.Handwoong:naver-sens-java:0.2.1'
+    implementation 'com.github.Handwoong:naver-sens-java:0.3.0'
 }
 ```
 
