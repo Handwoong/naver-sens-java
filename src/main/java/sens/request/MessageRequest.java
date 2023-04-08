@@ -1,12 +1,16 @@
 package sens.request;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.IOException;
 import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
+import okhttp3.Response;
 import sens.exception.FailCreateRequestException;
+import sens.exception.FailSendRequestException;
 import sens.sender.MessageHeader;
-import sens.template.kakao.KakaoTemplate;
+import sens.template.MessageTemplate;
 
 public class MessageRequest {
 
@@ -14,12 +18,14 @@ public class MessageRequest {
 
     private final ObjectMapper mapper;
 
+    private final OkHttpClient client = new OkHttpClient();
+
     public MessageRequest(String accessKey, String secretKey, ObjectMapper mapper) {
         this.header = new MessageHeader(accessKey, secretKey);
         this.mapper = mapper;
     }
 
-    public Request createSendRequest(KakaoTemplate messageTemplate,
+    public Request createSendRequest(MessageTemplate messageTemplate,
             String url) {
         try {
             return header.createHeader("POST", url)
@@ -44,5 +50,15 @@ public class MessageRequest {
         return header.createHeader("GET", newUrl)
                 .url("https://sens.apigw.ntruss.com" + newUrl)
                 .build();
+    }
+
+    public <T> T sendRequest(Request request, Class<T> clazz) {
+        try {
+            Response response = client.newCall(request).execute();
+            assert response.body() != null;
+            return mapper.readValue(response.body().string(), clazz);
+        } catch (IOException e) {
+            throw new FailSendRequestException("HTTP 요청 또는 JSON 객체 매핑에 실패했습니다.");
+        }
     }
 }

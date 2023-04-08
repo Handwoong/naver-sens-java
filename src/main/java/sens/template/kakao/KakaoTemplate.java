@@ -1,9 +1,10 @@
 package sens.template.kakao;
 
 import java.util.List;
+import sens.template.MessageTemplate;
 import sens.template.kakao.messages.KaKaoMessage;
 
-public class KakaoTemplate {
+public class KakaoTemplate implements MessageTemplate {
 
     private final String plusFriendId;
 
